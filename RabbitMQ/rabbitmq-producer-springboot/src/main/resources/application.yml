@@ -1,0 +1,14 @@
+spring:
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: zdy
+    password: zdy
+    virtual-host: /demo_virtual
+    listener: # 消费者监听设置手动确认
+      direct:
+        acknowledge-mode: manual
+      simple:
+        acknowledge-mode: manual
+#    publisher-confirm-type: correlated
+#    publisher-returns: true #开启return机制

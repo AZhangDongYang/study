@@ -1,0 +1,9 @@
+spring:
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: zdy
+    password: zdy
+    virtual-host: /demo_virtual
+#    publisher-confirm-type: correlated
+    publisher-returns: true #开启return机制
