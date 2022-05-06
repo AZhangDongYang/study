@@ -5,3 +5,8 @@ spring:
     username: zdy
     password: zdy
     virtual-host: /demo_virtual
+    listener: # 消费者监听设置手动确认
+      direct:
+        acknowledge-mode: manual
+      simple:
+        acknowledge-mode: manual

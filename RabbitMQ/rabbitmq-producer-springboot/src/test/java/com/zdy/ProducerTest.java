@@ -4,6 +4,7 @@ import com.zdy.config.RabbitMQConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,14 +31,22 @@ public class ProducerTest {
 //                }
 //            }
 //        });
-        rabbitTemplate.setReturnCallback(new RabbitTemplate.ReturnCallback() {
-            @Override
-            public void returnedMessage(Message message, int i, String s, String s1, String s2) {
-                System.out.println(new String(message.getBody()));
-            }
-        });
+//        rabbitTemplate.setReturnCallback(new RabbitTemplate.ReturnCallback() {
+//            @Override
+//            public void returnedMessage(Message message, int i, String s, String s1, String s2) {
+//                System.out.println(new String(message.getBody()));
+//            }
+//        });
 //        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, "log.error", "hello rabbitmq");
-        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, "log.infoxx.xxx.xx", "hello rabbitmq");
-//        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, "log.warning", "hello rabbitmq");
+//        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, "log.infoxx.xxx.xx", "hello rabbitmq");
+        MessageProperties messageProperties = new MessageProperties();
+
+        //设置过期时间
+        messageProperties.setExpiration("10000");
+        CorrelationData correlationData = new CorrelationData();
+
+        Message message = new Message("hello rabbitmq".getBytes(), messageProperties);
+
+        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, "log.warning", message);
     }
 }
