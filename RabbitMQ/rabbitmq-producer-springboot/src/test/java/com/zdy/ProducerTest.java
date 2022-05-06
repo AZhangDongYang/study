@@ -47,6 +47,6 @@ public class ProducerTest {
 
         Message message = new Message("hello rabbitmq".getBytes(), messageProperties);
 
-        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, "log.warning", message);
+        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, "asd.dead", message);
     }
 }
